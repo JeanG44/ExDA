@@ -1,7 +1,8 @@
-## 숫자형, 범주형, 시간형 변수에 대한 EDA
-# 숫자형: Numeric, Integer
-# 범주형: character, factor
-# 시간형: Date %Y-%d-%m (0000-00-00)
+## A Function that returns summaries of varibles of three types(Numeric, Categorical, Time)
+
+# Numeric: Numeric, Integer
+# Categorical: character, factor
+# Time: Date %Y-%d-%m (0000-00-00)
 
 getSummary <- function(data, savefile=FALSE, filedir=NA, K=5, sepvalue=F){
   library(dplyr)
