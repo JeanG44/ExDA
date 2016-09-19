@@ -41,7 +41,8 @@ getSummary <- function(data, savefile=FALSE, filedir=NA, K=5, sepvalue=F){
     # 요약 데이터 생성 함수 정의 
     getNumericSummary <- function(x){
       return(data.frame(Type='Numeric',  Missing=MissingNum(x), MissingRatio=MissingRatio(x),
-                        Min=min(x), Max=max(x),Mean=round(mean(x), 2), Median=median(x)))
+                        Min=min(x, na.rm=TRUE), Max=max(x, na.rm=TRUE),
+                        Mean=round(mean(x, na.rm=TRUE), 2), Median=median(x, na.rm=TRUE)))
     }
     
     # 요약 데이터 생성
@@ -129,7 +130,7 @@ getSummary <- function(data, savefile=FALSE, filedir=NA, K=5, sepvalue=F){
              Nrow=nrow(data))%>%
       select(Name, Nrow, everything())
   }
-##----------------------------------------------------범주형 변수 요약
+##----------------------------------------------------시간 변수 요약
 if(TimeExists){
   
   MissingRatioTime <- function(x){
@@ -170,12 +171,12 @@ if(TimeExists){
                       Duration=Duration(x)))
   }
 
-  # 시간 데이터 요약
+  # 요약 데이터 생성
   TimeVariables <- bind_rows(apply(select_(data,.dots=names(classes[classes=='Time'])), 2, getTimeSummary))%>%
     mutate(Name=names(classes[classes=='Time']),
            Nrow=nrow(data))%>%
     select(Name, Nrow, everything())
-  }
+}
   
   if(savefile){
     if(NumericExists){
