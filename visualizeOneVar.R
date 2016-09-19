@@ -70,14 +70,16 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         var <- table(var)
         var <- var[order(var, decreasing=TRUE)]
         tmp <- as.data.frame(var)
-        ggplot(data=tmp, aes(x=var, y=Freq))+
+        png(paste(file_dir, '/histogram_all_', name, '.png', sep=''),
+            width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
+        plot(ggplot(data=tmp, aes(x=var, y=Freq))+
           geom_bar(stat='identity')+
           ggtitle(name)+
           xlab('Category')+
           theme_bw()+
           theme(axis.text.x=element_blank(),
-                title=element_text(size=24))
-        ggsave(filename=paste(file_dir, '/histogram_all_', name, '.png', sep=''))
+                title=element_text(size=24)))
+        dev.off()
       }
     }else if(categorical_graph=='histogram_topk'){
       for(name in names(classes)[classes=='Categorical']){
@@ -94,14 +96,16 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
           }
         }
         tmp$var <- ordered(tmp$var, levels=tmp$var)
-        ggplot(data=tmp, aes(x=var, y=Freq))+
+        png(paste(file_dir, '/histogram_top',k,'_', name, '.png', sep=''),
+            width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
+        plot(ggplot(data=tmp, aes(x=var, y=Freq))+
           geom_bar(stat='identity')+
           ggtitle(paste(name, 'Top_', k, 'Categories', sep=''))+
           xlab('Category')+
           theme_bw()+
           theme(axis.text.x=element_blank(),
-                title=element_text(size=24))
-        ggsave(filename=paste(file_dir, '/histogram_top',k,'_', name, '.png', sep=''))
+                title=element_text(size=24)))
+        dev.off()
       }
     }else{
     }
@@ -147,14 +151,16 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         var <- ordered(as.character(var), levels=c('MON','TUE','WED','THU','FRI','SAT','SUN'))
         var <- table(var)
         tmp <- as.data.frame(var)
-        ggplot(data=tmp, aes(x=var, y=Freq))+
+        png(paste(file_dir, '/WeekdaySummary_', name, '.png', sep=''),
+            width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
+        plot(ggplot(data=tmp, aes(x=var, y=Freq))+
           geom_bar(stat='identity')+
           ggtitle(name)+
           xlab('Weekday')+
           theme_bw()+
           theme(axis.text.x=element_text(angle=90, hjust=1, size=11),
-                title=element_text(size=24))
-        ggsave(filename=paste(file_dir, '/weekday_summary_', name, '.png', sep=''))
+                title=element_text(size=24)))
+        dev.off()
       }
     }else{
     }
