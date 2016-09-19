@@ -35,7 +35,7 @@ getSummary <- function(data, savefile=FALSE, filedir=NA, K=5, sepvalue=F){
     MissingRatio <- function(x){
       x <- as.character(x)
       missing <- sum(is.na(x))
-      return(missing/length(x))
+      return(round(missing/length(x), 4))
     }
     
     # 요약 데이터 생성 함수 정의 
@@ -66,7 +66,7 @@ getSummary <- function(data, savefile=FALSE, filedir=NA, K=5, sepvalue=F){
     MissingRatio <- function(x){
       x <- as.character(x)
       missing <- sum(is.na(x))
-      return(missing/length(x))
+      return(round(missing/length(x), 4))
     }
     
     # 최빈값의 이름과 빈도를 반환하는 함수 정의
@@ -136,7 +136,7 @@ if(TimeExists){
   MissingRatioTime <- function(x){
     x <- as.Date(x)
     missing <- sum(is.na(x))
-    return(missing/length(x))
+    return(round(missing/length(x), 4))
   }
   
   MissingNumTime <- function(x){
