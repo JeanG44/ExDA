@@ -4,6 +4,7 @@
 # numeric: boxplot
 # categorical: histogram_all, histogram_topk
 # time: Spectogram, WeekDaySummary
+# 변수 타입별로 여러 그래프 한번에 그릴 수 있게 코드 수정 ex. 'histogram%in%categorical_graphs
 visualizeOnevar <- function(data, save_file=TRUE, file_dir,
                             numeric_graph='boxplot',
                             skewed=TRUE,
