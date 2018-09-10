@@ -17,7 +17,6 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
                             outlier_rate=0.01){
   library(ggplot2)
   ## functions that are used for summarization of data
-  # 변수 타입 파악(로지컬일 경우 카테고리컬로 봄)
   classes <- sapply(data, class)
   classes <- ifelse(classes=='Date', 'Time',
                     ifelse(classes=='integer'|classes=='numeric', 'Numeric','Categorical'))
@@ -27,7 +26,7 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
   CategoricalExists <- ifelse('Categorical'%in%classname, T, F)
   TimeExists <- ifelse('Time'%in%classname, T, F)
   
-  ##----------------------------------------------------숫자형 변수 시각화
+  ##----------------------------------------------------visualize numerical variable
   if(NumericExists){
     if(numeric_graph=='boxplot'){
       if(skewed){
@@ -74,12 +73,12 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         png(paste(file_dir, '/histogram_all_', name, '.png', sep=''),
             width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
         plot(ggplot(data=tmp, aes(x=var, y=Freq))+
-          geom_bar(stat='identity')+
-          ggtitle(name)+
-          xlab('Category')+
-          theme_bw()+
-          theme(axis.text.x=element_blank(),
-                title=element_text(size=24)))
+               geom_bar(stat='identity')+
+               ggtitle(name)+
+               xlab('Category')+
+               theme_bw()+
+               theme(axis.text.x=element_blank(),
+                     title=element_text(size=24)))
         dev.off()
       }
     }else if(categorical_graph=='histogram_topk'){
@@ -100,12 +99,12 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         png(paste(file_dir, '/histogram_top',k,'_', name, '.png', sep=''),
             width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
         plot(ggplot(data=tmp, aes(x=var, y=Freq))+
-          geom_bar(stat='identity')+
-          ggtitle(paste(name, 'Top_', k, 'Categories', sep=''))+
-          xlab('Category')+
-          theme_bw()+
-          theme(axis.text.x=element_blank(),
-                title=element_text(size=24)))
+               geom_bar(stat='identity')+
+               ggtitle(paste(name, 'Top_', k, 'Categories', sep=''))+
+               xlab('Category')+
+               theme_bw()+
+               theme(axis.text.x=element_blank(),
+                     title=element_text(size=24)))
         dev.off()
       }
     }else{
@@ -135,7 +134,7 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         plot(ggplot(data=tmp, aes(x=var, y=Freq))+
                geom_line()+
                ggtitle(name)+
-               xlab('날짜')+
+               xlab('Date')+
                theme_bw()+
                theme(axis.text.x=element_text(angle=90, hjust=1, size=11),
                      title=element_text(size=24)))
@@ -155,12 +154,12 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
         png(paste(file_dir, '/WeekdaySummary_', name, '.png', sep=''),
             width=600, height=600, type='cairo', family='Dejavu Sans', pointsize=20)
         plot(ggplot(data=tmp, aes(x=var, y=Freq))+
-          geom_bar(stat='identity')+
-          ggtitle(name)+
-          xlab('Weekday')+
-          theme_bw()+
-          theme(axis.text.x=element_text(angle=90, hjust=1, size=11),
-                title=element_text(size=24)))
+               geom_bar(stat='identity')+
+               ggtitle(name)+
+               xlab('Weekday')+
+               theme_bw()+
+               theme(axis.text.x=element_text(angle=90, hjust=1, size=11),
+                     title=element_text(size=24)))
         dev.off()
       }
     }else{
@@ -168,5 +167,3 @@ visualizeOnevar <- function(data, save_file=TRUE, file_dir,
   }else{
   }
 }
-
-  
